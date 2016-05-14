@@ -56,18 +56,14 @@
         var hours = (date.getHours() + 24) % 12 || 12;
         var minutes = date.getMinutes();
 
-        var h1 = hours > 9 ? 1 : null;
+        var h1 = hours > 9 ? 1 : 0;
         var h2 = hours > 9 ? hours - 10 : hours;
-        var m1 = minutes > 9 ? Math.floor(minutes / 10) : null;
+        var m1 = minutes > 9 ? Math.floor(minutes / 10) : 0;
         var m2 = minutes > 9 ? minutes % 10 : minutes;
 
-        if (h1 != null) {
-          showQr('h1', h1);
-        }
+        showQr('h1', h1);
         showQr('h2', h2);
-        if (m1 != null) {
-          showQr('m1', m1);
-        }
+        showQr('m1', m1);
         showQr('m2', m2);
       }
 
