@@ -1,0 +1,20 @@
+{
+  "name": "qr-clock-web",
+  "homepage": "https://github.com/greysonp/qr-clock-web",
+  "authors": [
+    "Greyson Parrelli <greyson.parrelli@gmail.com>"
+  ],
+  "description": "",
+  "main": "",
+  "license": "The Unlicense",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "qr-js": "^1.1.4"
+  }
+}
