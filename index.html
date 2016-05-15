@@ -14,16 +14,14 @@
       }
       #container {
         margin: auto;
-        width: 700px;
+        max-width: 700px;
         height: 100%;
         text-align: center;
-        font-size: 50px;
         font-weight: bold;
       }
 
       #container canvas {
         display: inline-block;
-        padding: 20px;
       }
 
       #container tr, #container td {
@@ -31,20 +29,40 @@
         text-align: center;
       }
 
+      #container td {
+        padding: 20px;
+      }
+
+      #colon {
+        font-size: 80px;
+      }
+
+      #date {
+        text-align: right !important;
+        font-size: 48px;
+        font-family: monospace;
+      }
+
     </style>
   </head>
   <body>
     <table id="container">
-      <tr>
-        <td><canvas width="150" height="150" id="h1"></canvas></td>
-        <td><canvas width="150" height="150" id="h2"></canvas></td>
-        <td>:</td>
-        <td><canvas width="150" height="150" id="m1"></canvas></td>
-        <td><canvas width="150" height="150" id="m2"></canvas></td>
-      </tr>
+      <tr><td><table>
+        <tr><td id="date" colspan="5"></td></tr>
+        <tr>
+          <td><canvas width="150" height="150" id="h1"></canvas></td>
+          <td><canvas width="150" height="150" id="h2"></canvas></td>
+          <td id="colon">:</td>
+          <td><canvas width="150" height="150" id="m1"></canvas></td>
+          <td><canvas width="150" height="150" id="m2"></canvas></td>
+        </tr>
+      </table></tr></td>
     </div>
 
     <script type="text/javascript">
+      var DAYS_OF_WEEK = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+      var MONTHS = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+
       init();
 
       function init() {
@@ -52,6 +70,7 @@
       }
 
       function updateClock() {
+        // Time
         var date = new Date();
         var hours = (date.getHours() + 24) % 12 || 12;
         var minutes = date.getMinutes();
@@ -65,6 +84,22 @@
         showQr('h2', h2);
         showQr('m1', m1);
         showQr('m2', m2);
+
+        // Colon blink
+        if (date.getSeconds() % 2 == 0) {
+          document.getElementById('colon').style.visibility = 'hidden';
+        } else {
+          document.getElementById('colon').style.visibility = 'visible';
+        }
+
+        // Date
+        var dayOfWeek = DAYS_OF_WEEK[date.getDay()];
+        var month = MONTHS[date.getMonth()];
+        var dayOfMonth = date.getDate();
+        var year = date.getFullYear();
+
+        var dateString = dayOfWeek + ', ' + month + ' ' + dayOfMonth + ', ' + year;
+        document.getElementById('date').innerText = dateString;
       }
 
       function showQr(id, value) {
